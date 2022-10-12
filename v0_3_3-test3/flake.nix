@@ -7,11 +7,11 @@
   inputs.flakeNimbleLib.type  = "github";
   inputs.flakeNimbleLib.inputs.nixpkgs.follows = "nixpkgs";
   
-  inputs.src-peni-v0_3_0.flake = false;
-  inputs.src-peni-v0_3_0.ref   = "refs/tags/v0.3.0";
-  inputs.src-peni-v0_3_0.owner = "srozb";
-  inputs.src-peni-v0_3_0.repo  = "peni";
-  inputs.src-peni-v0_3_0.type  = "github";
+  inputs.src-peni-v0_3_3-test3.flake = false;
+  inputs.src-peni-v0_3_3-test3.ref   = "refs/tags/v0.3.3-test3";
+  inputs.src-peni-v0_3_3-test3.owner = "srozb";
+  inputs.src-peni-v0_3_3-test3.repo  = "peni";
+  inputs.src-peni-v0_3_3-test3.type  = "github";
   
   inputs."libpe".owner = "nim-nix-pkgs";
   inputs."libpe".ref   = "master";
@@ -45,16 +45,32 @@
   inputs."termstyle".inputs.nixpkgs.follows = "nixpkgs";
   inputs."termstyle".inputs.flakeNimbleLib.follows = "flakeNimbleLib";
   
+  inputs."flower".owner = "nim-nix-pkgs";
+  inputs."flower".ref   = "master";
+  inputs."flower".repo  = "flower";
+  inputs."flower".dir   = "main";
+  inputs."flower".type  = "github";
+  inputs."flower".inputs.nixpkgs.follows = "nixpkgs";
+  inputs."flower".inputs.flakeNimbleLib.follows = "flakeNimbleLib";
+  
+  inputs."flatty".owner = "nim-nix-pkgs";
+  inputs."flatty".ref   = "master";
+  inputs."flatty".repo  = "flatty";
+  inputs."flatty".dir   = "0_3_4";
+  inputs."flatty".type  = "github";
+  inputs."flatty".inputs.nixpkgs.follows = "nixpkgs";
+  inputs."flatty".inputs.flakeNimbleLib.follows = "flakeNimbleLib";
+  
   outputs = { self, nixpkgs, flakeNimbleLib, ...}@deps:
   let 
     lib  = flakeNimbleLib.lib;
-    args = ["self" "nixpkgs" "flakeNimbleLib" "src-peni-v0_3_0"];
+    args = ["self" "nixpkgs" "flakeNimbleLib" "src-peni-v0_3_3-test3"];
     over = if builtins.pathExists ./override.nix 
            then { override = import ./override.nix; }
            else { };
   in lib.mkRefOutput (over // {
     inherit self nixpkgs ;
-    src  = deps."src-peni-v0_3_0";
+    src  = deps."src-peni-v0_3_3-test3";
     deps = builtins.removeAttrs deps args;
     meta = builtins.fromJSON (builtins.readFile ./meta.json);
   } );

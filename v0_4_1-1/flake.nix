@@ -7,11 +7,11 @@
   inputs.flakeNimbleLib.type  = "github";
   inputs.flakeNimbleLib.inputs.nixpkgs.follows = "nixpkgs";
   
-  inputs.src-peni-v0_3_0.flake = false;
-  inputs.src-peni-v0_3_0.ref   = "refs/tags/v0.3.0";
-  inputs.src-peni-v0_3_0.owner = "srozb";
-  inputs.src-peni-v0_3_0.repo  = "peni";
-  inputs.src-peni-v0_3_0.type  = "github";
+  inputs.src-peni-v0_4_1-1.flake = false;
+  inputs.src-peni-v0_4_1-1.ref   = "refs/tags/v0.4.1-1";
+  inputs.src-peni-v0_4_1-1.owner = "srozb";
+  inputs.src-peni-v0_4_1-1.repo  = "peni";
+  inputs.src-peni-v0_4_1-1.type  = "github";
   
   inputs."libpe".owner = "nim-nix-pkgs";
   inputs."libpe".ref   = "master";
@@ -45,16 +45,24 @@
   inputs."termstyle".inputs.nixpkgs.follows = "nixpkgs";
   inputs."termstyle".inputs.flakeNimbleLib.follows = "flakeNimbleLib";
   
+  inputs."authenticode".owner = "nim-nix-pkgs";
+  inputs."authenticode".ref   = "master";
+  inputs."authenticode".repo  = "authenticode";
+  inputs."authenticode".dir   = "v0_1_1";
+  inputs."authenticode".type  = "github";
+  inputs."authenticode".inputs.nixpkgs.follows = "nixpkgs";
+  inputs."authenticode".inputs.flakeNimbleLib.follows = "flakeNimbleLib";
+  
   outputs = { self, nixpkgs, flakeNimbleLib, ...}@deps:
   let 
     lib  = flakeNimbleLib.lib;
-    args = ["self" "nixpkgs" "flakeNimbleLib" "src-peni-v0_3_0"];
+    args = ["self" "nixpkgs" "flakeNimbleLib" "src-peni-v0_4_1-1"];
     over = if builtins.pathExists ./override.nix 
            then { override = import ./override.nix; }
            else { };
   in lib.mkRefOutput (over // {
     inherit self nixpkgs ;
-    src  = deps."src-peni-v0_3_0";
+    src  = deps."src-peni-v0_4_1-1";
     deps = builtins.removeAttrs deps args;
     meta = builtins.fromJSON (builtins.readFile ./meta.json);
   } );

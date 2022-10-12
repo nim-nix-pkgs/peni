@@ -16,7 +16,7 @@
   inputs."libpe".owner = "nim-nix-pkgs";
   inputs."libpe".ref   = "master";
   inputs."libpe".repo  = "libpe";
-  inputs."libpe".dir   = "v0_3_3";
+  inputs."libpe".dir   = "v0_3_6";
   inputs."libpe".type  = "github";
   inputs."libpe".inputs.nixpkgs.follows = "nixpkgs";
   inputs."libpe".inputs.flakeNimbleLib.follows = "flakeNimbleLib";

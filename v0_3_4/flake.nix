@@ -7,11 +7,11 @@
   inputs.flakeNimbleLib.type  = "github";
   inputs.flakeNimbleLib.inputs.nixpkgs.follows = "nixpkgs";
   
-  inputs.src-peni-v0_3_0.flake = false;
-  inputs.src-peni-v0_3_0.ref   = "refs/tags/v0.3.0";
-  inputs.src-peni-v0_3_0.owner = "srozb";
-  inputs.src-peni-v0_3_0.repo  = "peni";
-  inputs.src-peni-v0_3_0.type  = "github";
+  inputs.src-peni-v0_3_4.flake = false;
+  inputs.src-peni-v0_3_4.ref   = "refs/tags/v0.3.4";
+  inputs.src-peni-v0_3_4.owner = "srozb";
+  inputs.src-peni-v0_3_4.repo  = "peni";
+  inputs.src-peni-v0_3_4.type  = "github";
   
   inputs."libpe".owner = "nim-nix-pkgs";
   inputs."libpe".ref   = "master";
@@ -48,13 +48,13 @@
   outputs = { self, nixpkgs, flakeNimbleLib, ...}@deps:
   let 
     lib  = flakeNimbleLib.lib;
-    args = ["self" "nixpkgs" "flakeNimbleLib" "src-peni-v0_3_0"];
+    args = ["self" "nixpkgs" "flakeNimbleLib" "src-peni-v0_3_4"];
     over = if builtins.pathExists ./override.nix 
            then { override = import ./override.nix; }
            else { };
   in lib.mkRefOutput (over // {
     inherit self nixpkgs ;
-    src  = deps."src-peni-v0_3_0";
+    src  = deps."src-peni-v0_3_4";
     deps = builtins.removeAttrs deps args;
     meta = builtins.fromJSON (builtins.readFile ./meta.json);
   } );
